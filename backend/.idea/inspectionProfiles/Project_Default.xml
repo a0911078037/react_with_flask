@@ -1,0 +1,66 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredPackages">
+        <value>
+          <list size="43">
+            <item index="0" class="java.lang.String" itemvalue="pytest-clarity" />
+            <item index="1" class="java.lang.String" itemvalue="pytest-freezegun" />
+            <item index="2" class="java.lang.String" itemvalue="distutils-commands" />
+            <item index="3" class="java.lang.String" itemvalue="scikit-learn" />
+            <item index="4" class="java.lang.String" itemvalue="aie-py-utils" />
+            <item index="5" class="java.lang.String" itemvalue="plotly" />
+            <item index="6" class="java.lang.String" itemvalue="numpy" />
+            <item index="7" class="java.lang.String" itemvalue="xgboost" />
+            <item index="8" class="java.lang.String" itemvalue="aie-data-access-lib" />
+            <item index="9" class="java.lang.String" itemvalue="aie-system-lib" />
+            <item index="10" class="java.lang.String" itemvalue="torch" />
+            <item index="11" class="java.lang.String" itemvalue="torchvision" />
+            <item index="12" class="java.lang.String" itemvalue="torchaudio" />
+            <item index="13" class="java.lang.String" itemvalue="pycocotools" />
+            <item index="14" class="java.lang.String" itemvalue="scikit-image" />
+            <item index="15" class="java.lang.String" itemvalue="protobuf" />
+            <item index="16" class="java.lang.String" itemvalue="requests" />
+            <item index="17" class="java.lang.String" itemvalue="XlsxWriter" />
+            <item index="18" class="java.lang.String" itemvalue="seaborn" />
+            <item index="19" class="java.lang.String" itemvalue="flask-cors" />
+            <item index="20" class="java.lang.String" itemvalue="itsdangerous" />
+            <item index="21" class="java.lang.String" itemvalue="rarfile" />
+            <item index="22" class="java.lang.String" itemvalue="split-folders" />
+            <item index="23" class="java.lang.String" itemvalue="Flask-Session" />
+            <item index="24" class="java.lang.String" itemvalue="flask-restx" />
+            <item index="25" class="java.lang.String" itemvalue="opencv-contrib-python" />
+            <item index="26" class="java.lang.String" itemvalue="scipy" />
+            <item index="27" class="java.lang.String" itemvalue="werkzeug" />
+            <item index="28" class="java.lang.String" itemvalue="six" />
+            <item index="29" class="java.lang.String" itemvalue="tqdm" />
+            <item index="30" class="java.lang.String" itemvalue="albumentations" />
+            <item index="31" class="java.lang.String" itemvalue="jinja2" />
+            <item index="32" class="java.lang.String" itemvalue="paramiko" />
+            <item index="33" class="java.lang.String" itemvalue="natsort" />
+            <item index="34" class="java.lang.String" itemvalue="tensorboard" />
+            <item index="35" class="java.lang.String" itemvalue="matplotlib" />
+            <item index="36" class="java.lang.String" itemvalue="labelme" />
+            <item index="37" class="java.lang.String" itemvalue="pillow" />
+            <item index="38" class="java.lang.String" itemvalue="flask" />
+            <item index="39" class="java.lang.String" itemvalue="pandarallel" />
+            <item index="40" class="java.lang.String" itemvalue="nvidia-ml-py3" />
+            <item index="41" class="java.lang.String" itemvalue="efficientnet-pytorch" />
+            <item index="42" class="java.lang.String" itemvalue="openpyxl" />
+          </list>
+        </value>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyPep8NamingInspection" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <option name="ignoredErrors">
+        <list>
+          <option value="N803" />
+          <option value="N801" />
+          <option value="N802" />
+          <option value="N812" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>
