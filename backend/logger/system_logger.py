@@ -9,7 +9,7 @@ class Logger:
     def __init__(self):
         pass
 
-    def create(self, name='System', level=logging.INFO, log_path=''):
+    def create(self, name='System', level=logging.INFO, log_path='./logs'):
         logger = logging.getLogger(name)
         time = datetime.now()
 
@@ -18,11 +18,10 @@ class Logger:
 
         if not os.path.isdir(log_path):
             os.mkdir(log_path)
-
-        handler = RotatingFileHandler(filename=os.path.join(log_path, f'{time:%Y-M-D_h}.log')
+        handler = RotatingFileHandler(filename=log_path + f'{time:/%Y-%m-%d_%H}.log'
                                       , maxBytes=100000, backupCount=5)
-        formatter = logging.Formatter(log_format)
         logger.setLevel(level)
+        formatter = logging.Formatter(log_format)
         handler.setLevel(level)
         handler.setFormatter(formatter)
         logger.addHandler(handler)

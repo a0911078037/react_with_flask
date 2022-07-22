@@ -2,18 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import Baby from './baby'
 import reportWebVitals from './reportWebVitals';
 
-const Message=()=>{
-  document.getElementById('area').innerHTML = 'clicked';
-}
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Baby/>
-    <div id="area"></div>
+    <App/>
   </React.StrictMode>
 );
 
