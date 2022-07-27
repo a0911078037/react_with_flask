@@ -26,7 +26,7 @@ class users_query:
         try:
             self.logger.debug('getting password auth')
             sql = f'''
-                    SELECT Password, salt FROM users
+                    SELECT Password, salt, Name FROM users
                     WHERE Account = '{acc}'
                     '''
             pd_data = self._db_handler.execute(sql)
@@ -34,7 +34,8 @@ class users_query:
             for data in pd_data:
                 d = {
                     'pws': data[0],
-                    'salt': data[1]
+                    'salt': data[1],
+                    'name': data[2]
                 }
                 result.append(d)
             return result

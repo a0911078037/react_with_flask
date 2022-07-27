@@ -1,15 +1,23 @@
 import React, { Component } from 'react'
 import './login.css'
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import {Navigate} from 'react-router-dom';
+
 
 class Login extends Component {
   constructor(props) {
     super(props);
     this.sendForm = this.sendForm.bind(this);
-    if(!localStorage.getItem('newmember')){
-      this.showmsg('新增會員成功，請登入');
-      localStorage.clear();
+    this.state = {
+      logined: false
+    };
+    console.log(localStorage.getItem('logout'));
+    if(localStorage.getItem('newmember')){
+      this.showmsg('新增成功，請登入');
+    }
+    if(localStorage.getItem('logout')){
+      this.showmsg('登出成功');
     }
   }
   sendForm() {
@@ -25,7 +33,7 @@ class Login extends Component {
       'acc': acc,
       'pws': pws
     }
-    fetch('http://127.0.0.1:8000/api/login', {
+    fetch(`http://${process.env.REACT_APP_BACKEND_IP}:${process.env.REACT_APP_BACKEND_PORT}/api/login`, {
       method: 'POST',
       body: JSON.stringify(data),
       headers: new Headers({ 'Content-Type': 'application/json' })
@@ -33,9 +41,10 @@ class Login extends Component {
       .then(res => res.json())
       .then(data => {
         if (data['status'] === true) {
+          sessionStorage.setItem('token', data['result']['token']);
           this.setState({
             logined: true,
-            success: true
+            user: data['result']['user']
           });
         }
         else {
@@ -55,7 +64,9 @@ class Login extends Component {
       pauseOnHover: true,
       draggable: true,
       progress: undefined,
+      toastId: 'tests'
     });
+    localStorage.removeItem('newmember');
   }
 
   showerror = (msg) => {
@@ -74,7 +85,6 @@ class Login extends Component {
   render() {
     return (
       <>
-        <ToastContainer />
         <div id='login'>
           <div id='area'>
             <center><h2>登入</h2></center>
@@ -86,6 +96,7 @@ class Login extends Component {
             <a href="/newmember" id='new_member_href'>加入會員</a>
           </div>
         </div>
+       {this.state.logined && <Navigate to='/main' state={this.state}/>}
       </>
     );
   }

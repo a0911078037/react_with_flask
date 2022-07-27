@@ -1,9 +1,10 @@
 #login {
-  background-color: #95afba;
+  /* background-color: #95afba; */
   position: relative;
   height: 400px;
   display: flex;
   align-items: center;
+  padding: 20px;
 }
 
 #area {

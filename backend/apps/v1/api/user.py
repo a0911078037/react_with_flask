@@ -5,6 +5,7 @@ from . import Resource
 from apps.utils import ApiResponse
 from apps import config, logger
 from data_access.query.users_query import users_query
+from flask_jwt_extended import jwt_required
 import datetime
 import hashlib
 import uuid
@@ -30,3 +31,6 @@ class User(Resource):
 
             return ApiResponse(None, msg, False).to_dict(), 200, None
 
+    @jwt_required()
+    def get(self):
+        return ApiResponse().to_dict(), 200

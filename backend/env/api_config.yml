@@ -1,12 +1,13 @@
-storge:
-  using: 'mysql'
-  database:
-    ip: 'localhost'
-    port: '3306'
-    user: 'root'
-    password: '0000'
-    db: 'test'
+STORGE:
+  USING: 'mysql'
+  DATABASE:
+    IP: 'localhost'
+    PORT: '3306'
+    USER: 'root'
+    PASSWORD: '0000'
+    DB: 'test'
 
-api:
-  ip: '127.0.0.1'
-  port: '8000'
+API:
+  IP: '127.0.0.1'
+  PORT: '8000'
+  SECRET_KEY: "b'\xbcE1\xf9z{3\xf3\xfdp\xe6V\x91\x9b\x00N'"

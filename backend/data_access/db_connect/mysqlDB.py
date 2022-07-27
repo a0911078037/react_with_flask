@@ -6,11 +6,11 @@ class mysqlDB:
     def __init__(self, config, logger):
         self._config = config
         self.logger = logger
-        host = self._config['storge']['database']['ip']
-        port = self._config['storge']['database']['port']
-        user = self._config['storge']['database']['user']
-        password = self._config['storge']['database']['password']
-        database = self._config['storge']['database']['db']
+        host = self._config['STORGE']['DATABASE']['IP']
+        port = self._config['STORGE']['DATABASE']['PORT']
+        user = self._config['STORGE']['DATABASE']['USER']
+        password = self._config['STORGE']['DATABASE']['PASSWORD']
+        database = self._config['STORGE']['DATABASE']['DB']
         con = create_engine(f'mysql://{user}:{password}@{host}:{port}/{database}')
         self.logger.debug('connect to database')
         self._db_handler = con.connect()
@@ -26,6 +26,7 @@ class mysqlDB:
         con = self._db_handler.connect()
         try:
             result = con.execute(sql_statement)
+            return result
         except Exception as e:
             self.logger.error(f'database error: {e}')
             msg = e
@@ -34,4 +35,3 @@ class mysqlDB:
             con.close()
             if not success:
                 raise Exception(msg)
-        return result

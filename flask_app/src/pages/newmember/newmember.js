@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './newmember.css';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {Navigate} from 'react-router-dom';
 
@@ -23,7 +23,7 @@ class Newmember extends Component {
             'pws': pws,
             'name': name
         }
-        fetch('http://127.0.0.1:8000/api/user', {
+        fetch(`http://${process.env.REACT_APP_BACKEND_IP}:${process.env.REACT_APP_BACKEND_PORT}/api/user`, {
             method: 'POST',
             headers: new Headers({ 'Content-Type': 'application/json' }),
             body: JSON.stringify(data)
@@ -56,7 +56,6 @@ class Newmember extends Component {
     render() {
         return (
             <>
-                <ToastContainer />
                 <div id='login'>
                     <div id='area'>
                         <center><h2>加入會員</h2></center>
@@ -67,7 +66,7 @@ class Newmember extends Component {
                         <center><input type="submit" onClick={this.send} id='send'></input></center>
                     </div>
                 </div>
-                {this.state.newmember && <Navigate to='/'/>}
+                {this.state.success && <Navigate to='/'/>}
             </>
         )
     }
