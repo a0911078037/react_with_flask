@@ -28,7 +28,6 @@ class User(Resource):
                 msg = '此帳號已存在'
             else:
                 msg = '新增會員失敗'
-
             return ApiResponse(None, msg, False).to_dict(), 200, None
 
     @jwt_required()

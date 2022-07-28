@@ -15,6 +15,7 @@ if __name__ == "__main__":
     app.config['JWT_SECRET_KEY'] = config['API']['SECRET_KEY']
     app.config['JWT_TOKEN_LOCATION'] = ['headers']
     app.config['JWT_COOKIE_SECURE'] = True
+    app.config['JSON_AS_ASCII'] = False
     jwt = JWTManager()
     jwt.init_app(app)
     CORS(app)

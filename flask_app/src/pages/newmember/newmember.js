@@ -1,75 +1,159 @@
-import React, { Component } from 'react';
-import './newmember.css';
+import React from 'react';
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import CssBaseline from '@mui/material/CssBaseline';
+import TextField from '@mui/material/TextField';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+import Link from '@mui/material/Link';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import {Navigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-class Newmember extends Component {
-    constructor(props) {
-        super(props);
-        this.send = this.send.bind(this);
-        this.state = {
-            'success': false
-        };
-    }
-    send() {
-        var acc = document.getElementById('acc').value;
-        var pws = document.getElementById('pws').value;
-        var name = document.getElementById('name').value;
-        var encode = require('sha.js');
-        pws = encode('sha256').update(pws).digest('hex');
+// function Copyright(props) {
+//   return (
+//     <Typography variant="body2" color="text.secondary" align="center" {...props}>
+//       {'Copyright © '}
+//       <Link color="inherit" href="https://mui.com/">
+//         Your Website
+//       </Link>{' '}
+//       {new Date().getFullYear()}
+//       {'.'}
+//     </Typography>
+//   );
+// }
+
+function showmsg(msg) {
+    toast.success(msg, {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        toastId: 'tests'
+    });
+}
+
+function showerror(msg) {
+    toast.error(msg, {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'colored'
+    });
+}
+
+const theme = createTheme();
+
+export default function SignUp() {
+    var nav = useNavigate();
+    const handleSubmit = (event) => {
+        event.preventDefault();
         var data = {
-            'acc': acc,
-            'pws': pws,
-            'name': name
+            'name': document.getElementById('name').value,
+            'acc': document.getElementById('account').value,
+            'pws': document.getElementById('password').value
         }
         fetch(`http://${process.env.REACT_APP_BACKEND_IP}:${process.env.REACT_APP_BACKEND_PORT}/api/user`, {
             method: 'POST',
             headers: new Headers({ 'Content-Type': 'application/json' }),
             body: JSON.stringify(data)
-        })
-            .then(res => res.json())
+        }).then(res => res.json())
             .then(data => {
                 if (data['status'] === true) {
-                    localStorage.setItem('newmember', true);
-                    this.setState({success: true});
+                    nav('/', {state: {newmember: true}});
                 }
-                else {
-                    this.showerror(data['msg']);
+                else{
+                    console.log((data['msg']));
+                    showerror(data['msg']);
                 }
-            }).catch(
-                e => console.log(e)
-            )
-    }
-    showerror = (msg) => {
-        toast.error(msg, {
-            position: "top-center",
-            autoClose: 2000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: 'colored'
-        });
-    }
-    render() {
-        return (
-            <>
-                <div id='login'>
-                    <div id='area'>
-                        <center><h2>加入會員</h2></center>
-                        <div className='input_area'>帳號:<input type="text" id='acc'></input></div>
-                        <div className='input_area'>密碼:<input type="text" id='pws'></input></div>
-                        <div className='input_area'>姓名:<input type="text" id='name'></input></div>
-                        <br></br>
-                        <center><input type="submit" onClick={this.send} id='send'></input></center>
-                    </div>
-                </div>
-                {this.state.success && <Navigate to='/'/>}
-            </>
-        )
-    }
+            }).catch(e => {
+                console.log(e);
+            });
+    };
 
+    return (
+        <ThemeProvider theme={theme}>
+            <Container component="main" maxWidth="xs">
+                <CssBaseline />
+                <Box
+                    sx={{
+                        marginTop: 8,
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                    }}
+                >
+                    <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+                        <LockOutlinedIcon />
+                    </Avatar>
+                    <Typography component="h1" variant="h5">
+                        註冊
+                    </Typography>
+                    <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+                        <Grid container spacing={2}>
+                            <Grid item xs={12}>
+                                <TextField
+                                    required
+                                    fullWidth
+                                    id="name"
+                                    label="姓名"
+                                    name="name"
+                                    autoComplete="name"
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <TextField
+                                    required
+                                    fullWidth
+                                    id="account"
+                                    label="帳號"
+                                    name="account"
+                                    autoComplete="username"
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <TextField
+                                    required
+                                    fullWidth
+                                    name="password"
+                                    label="密碼"
+                                    type="password"
+                                    id="password"
+                                    autoComplete="new-password"
+                                />
+                            </Grid>
+                        </Grid>
+                        <Button
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            sx={{ mt: 3, mb: 2 }}
+                        >
+                            申請
+                        </Button>
+                        <Grid container justifyContent="flex-end">
+                            <Grid item>
+                                <Link href="/" variant="body2">
+                                    已經有帳號了?登入
+                                </Link>
+                            </Grid>
+                        </Grid>
+                    </Box>
+                </Box>
+                {/* <Copyright sx={{ mt: 5 }} /> */}
+            </Container>
+        </ThemeProvider>
+    );
 }
-export default Newmember;

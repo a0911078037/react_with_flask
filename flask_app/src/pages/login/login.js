@@ -1,105 +1,145 @@
-import React, { Component } from 'react'
-import './login.css'
+import React from 'react';
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import CssBaseline from '@mui/material/CssBaseline';
+import TextField from '@mui/material/TextField';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+import Link from '@mui/material/Link';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import {Navigate} from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 
-class Login extends Component {
-  constructor(props) {
-    super(props);
-    this.sendForm = this.sendForm.bind(this);
-    this.state = {
-      logined: false
-    };
-    console.log(localStorage.getItem('logout'));
-    if(localStorage.getItem('newmember')){
-      this.showmsg('新增成功，請登入');
-    }
-    if(localStorage.getItem('logout')){
-      this.showmsg('登出成功');
-    }
+
+const theme = createTheme();
+
+function showmsg(msg) {
+  toast.success(msg, {
+    position: "top-center",
+    autoClose: 3000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    draggable: true,
+    progress: undefined,
+    toastId: 'login_toast'
+  });
+}
+
+function showerror(msg) {
+  toast.error(msg, {
+    position: "top-center",
+    autoClose: 2000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    draggable: true,
+    progress: undefined,
+    theme: 'colored',
+    toastId: 'login_toast_error'
+  });
+}
+
+export default function SignIn() {
+  var nav = useNavigate();
+  var loc = useLocation();
+  if(loc.state && loc.state.logout){
+    showmsg('登出成功');
+    window.history.replaceState({}, document.title);
   }
-  sendForm() {
-    var acc = document.getElementById('acc').value;
-    var pws = document.getElementById('pws').value;
-    if(acc==='' || pws===''){
-      this.showerror("請填入數值");
-      return;
-    }
-    var encode = require('sha.js');
-    pws = encode('sha256').update(pws).digest('hex');
+  if(loc.state && loc.state.newmember){
+    showmsg('註冊成功，請登入');
+    window.history.replaceState({}, document.title);
+  }
+  const handleSubmit = (event) => {
+    event.preventDefault();
     var data = {
-      'acc': acc,
-      'pws': pws
+      'acc': document.getElementById('account').value,
+      'pws': document.getElementById('password').value
     }
     fetch(`http://${process.env.REACT_APP_BACKEND_IP}:${process.env.REACT_APP_BACKEND_PORT}/api/login`, {
       method: 'POST',
-      body: JSON.stringify(data),
-      headers: new Headers({ 'Content-Type': 'application/json' })
-    })
-      .then(res => res.json())
+      headers: new Headers({ 'Content-Type': 'application/json' }),
+      body: JSON.stringify(data)
+    }).then(res => res.json())
       .then(data => {
         if (data['status'] === true) {
           sessionStorage.setItem('token', data['result']['token']);
-          this.setState({
-            logined: true,
-            user: data['result']['user']
-          });
+          sessionStorage.setItem('user', data['result']['user']);
+          nav('/main', {state:{logined: true}});
         }
-        else {
-          this.showerror(data['msg']);
+        else{
+          showerror(data['msg']);
         }
-      }).catch(
-        e => console.log(e)
-      )
+      }).catch(e => {
+        console.log(e);
+      });
+  };
 
-  }
-  showmsg = (msg) => {
-    toast.success(msg, {
-      position: "top-center",
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      toastId: 'tests'
-    });
-    localStorage.removeItem('newmember');
-  }
-
-  showerror = (msg) => {
-    toast.error(msg, {
-      position: "top-center",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: 'colored'
-    });
-  }
-
-  render() {
-    return (
-      <>
-        <div id='login'>
-          <div id='area'>
-            <center><h2>登入</h2></center>
-            帳號:<input type="text" id='acc'></input>
-            <br></br><hr></hr>
-            密碼:<input type="text" id='pws'></input>
-            <br></br><hr></hr>
-            <input id='send' type='submit' value="送出" onClick={this.sendForm}></input>
-            <a href="/newmember" id='new_member_href'>加入會員</a>
-          </div>
-        </div>
-       {this.state.logined && <Navigate to='/main' state={this.state}/>}
-      </>
-    );
-  }
+  return (
+    <ThemeProvider theme={theme}>
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <Box
+          sx={{
+            marginTop: 8,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            登入系統
+          </Typography>
+          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="account"
+              label="帳號"
+              name="account"
+              autoComplete="account"
+              autoFocus
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="密碼"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+            />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+            >
+              登入
+            </Button>
+            <Grid container>
+              <Grid item>
+                <Link href="/newmember" variant="body2">
+                  {"加入會員"}
+                </Link>
+              </Grid>
+            </Grid>
+          </Box>
+        </Box>
+        {/* <Copyright sx={{ mt: 8, mb: 4 }} /> */}
+      </Container>
+    </ThemeProvider>
+  );
 }
 
-export default Login
+

@@ -19,6 +19,8 @@ class Login(Resource):
                 raise Exception('帳號不存在')
             pws = (result[0]['salt'] + pws).encode('utf-8')
             pws = hashlib.sha256(pws).hexdigest()
+            if pws != result[0]['pws']:
+                raise Exception('登入失敗')
             identity = {
                 'users': result[0]['name']
             }
@@ -26,9 +28,6 @@ class Login(Resource):
                 'user': result[0]['name'],
                 'token': create_access_token(identity)
             }
-
-            if pws != result[0]['pws']:
-                raise Exception('登入失敗')
             return ApiResponse(data).to_dict(), 200
         except Exception as e:
             return ApiResponse(None, str(e), False).to_dict(), 200
