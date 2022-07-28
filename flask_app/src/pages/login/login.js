@@ -57,9 +57,10 @@ export default function SignIn() {
   }
   const handleSubmit = (event) => {
     event.preventDefault();
+    var encode = require('sha.js');
     var data = {
       'acc': document.getElementById('account').value,
-      'pws': document.getElementById('password').value
+      'pws': encode('sha256').update(document.getElementById('password').value).digest('hex')
     }
     fetch(`http://${process.env.REACT_APP_BACKEND_IP}:${process.env.REACT_APP_BACKEND_PORT}/api/login`, {
       method: 'POST',

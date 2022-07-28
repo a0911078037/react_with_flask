@@ -60,10 +60,11 @@ export default function SignUp() {
     var nav = useNavigate();
     const handleSubmit = (event) => {
         event.preventDefault();
+        var encode = require('sha.js');
         var data = {
             'name': document.getElementById('name').value,
             'acc': document.getElementById('account').value,
-            'pws': document.getElementById('password').value
+            'pws': encode('sha256').update(document.getElementById('password').value).digest('hex')
         }
         fetch(`http://${process.env.REACT_APP_BACKEND_IP}:${process.env.REACT_APP_BACKEND_PORT}/api/user`, {
             method: 'POST',
