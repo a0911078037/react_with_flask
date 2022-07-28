@@ -36,7 +36,6 @@ function showmsg(msg) {
             closeOnClick: true,
             draggable: true,
             progress: undefined,
-            toastId: 'main_toast'
         }
     )
 }
@@ -60,9 +59,8 @@ const Main = () => {
     }
 
     if (loc.state && loc.state.logined === true) {
-        console.log(loc.state.logined)
         showmsg('登入成功');
-        window.history.replaceState({}, document.title);
+        delete loc.state;
     }
 
     function send() {
