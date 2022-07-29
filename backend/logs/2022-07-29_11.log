@@ -1,0 +1,60 @@
+[2022-07-29 11:08:26,220] - System - DEBUG - connect to database
+[2022-07-29 11:08:26,244] - System - DEBUG - database connected
+[2022-07-29 11:08:26,244] - System - DEBUG - getting password auth
+[2022-07-29 11:08:26,244] - System - DEBUG - execute sql statement
+[2022-07-29 11:17:55,881] - System - DEBUG - connect to database
+[2022-07-29 11:17:55,891] - System - DEBUG - database connected
+[2022-07-29 11:17:55,892] - System - DEBUG - getting password auth
+[2022-07-29 11:17:55,892] - System - DEBUG - execute sql statement
+[2022-07-29 11:18:24,673] - System - DEBUG - connect to database
+[2022-07-29 11:18:24,681] - System - DEBUG - database connected
+[2022-07-29 11:18:24,681] - System - DEBUG - getting password auth
+[2022-07-29 11:18:24,681] - System - DEBUG - execute sql statement
+[2022-07-29 11:18:31,407] - System - DEBUG - connect to database
+[2022-07-29 11:18:31,411] - System - DEBUG - database connected
+[2022-07-29 11:18:31,411] - System - DEBUG - getting password auth
+[2022-07-29 11:18:31,411] - System - DEBUG - execute sql statement
+[2022-07-29 11:23:21,479] - user_username - ERROR - database error: (MySQLdb.OperationalError) (1054, "Unknown column 'user' in 'where clause'")
+[SQL: 
+                DELETE FROM users WHERE user = 'temo'
+                ]
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+[2022-07-29 11:23:21,479] - user_username - ERROR - Exception(Exception(OperationalError('(MySQLdb.OperationalError) (1054, "Unknown column \'user\' in \'where clause\'")')))
+[2022-07-29 11:25:00,302] - System - DEBUG - connect to database
+[2022-07-29 11:25:00,310] - System - DEBUG - database connected
+[2022-07-29 11:25:00,310] - System - DEBUG - getting password auth
+[2022-07-29 11:25:00,311] - System - DEBUG - execute sql statement
+[2022-07-29 11:25:01,868] - user_username - ERROR - database error: (MySQLdb.ProgrammingError) (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1")
+[SQL: 
+                DELETE FROM users WHERE (user = 'temo)'
+                ]
+(Background on this error at: https://sqlalche.me/e/14/f405)
+[2022-07-29 11:25:01,868] - user_username - ERROR - Exception(Exception(ProgrammingError('(MySQLdb.ProgrammingError) (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \'\' at line 1")')))
+[2022-07-29 11:26:20,014] - user_username - ERROR - Exception(ResourceClosedError('This result object does not return rows. It has been closed automatically.'))
+[2022-07-29 11:27:11,984] - System - DEBUG - connect to database
+[2022-07-29 11:27:11,992] - System - DEBUG - database connected
+[2022-07-29 11:27:11,992] - System - DEBUG - getting password auth
+[2022-07-29 11:27:11,992] - System - DEBUG - execute sql statement
+[2022-07-29 11:27:37,501] - System - DEBUG - connect to database
+[2022-07-29 11:27:37,504] - System - DEBUG - database connected
+[2022-07-29 11:27:37,504] - System - DEBUG - getting password auth
+[2022-07-29 11:27:37,504] - System - DEBUG - execute sql statement
+[2022-07-29 11:27:55,226] - System - DEBUG - connect to database
+[2022-07-29 11:27:55,229] - System - DEBUG - database connected
+[2022-07-29 11:27:55,229] - System - DEBUG - getting password auth
+[2022-07-29 11:27:55,229] - System - DEBUG - execute sql statement
+[2022-07-29 11:28:08,778] - System - DEBUG - connect to database
+[2022-07-29 11:28:08,783] - System - DEBUG - database connected
+[2022-07-29 11:28:08,784] - System - DEBUG - getting password auth
+[2022-07-29 11:28:08,784] - System - DEBUG - execute sql statement
+[2022-07-29 11:37:40,420] - System - DEBUG - connect to database
+[2022-07-29 11:37:40,423] - System - DEBUG - database connected
+[2022-07-29 11:37:40,423] - System - DEBUG - getting password auth
+[2022-07-29 11:37:40,423] - System - DEBUG - execute sql statement
+[2022-07-29 11:38:59,134] - System - DEBUG - connect to database
+[2022-07-29 11:38:59,142] - System - DEBUG - database connected
+[2022-07-29 11:38:59,142] - System - DEBUG - getting password auth
+[2022-07-29 11:38:59,142] - System - DEBUG - execute sql statement
+[2022-07-29 11:48:18,804] - user_username - ERROR - Exception(TypeError("object of type 'LegacyCursorResult' has no len()"))
+[2022-07-29 11:48:48,743] - user_username - ERROR - Exception(TypeError("object of type 'MySQLExecutionContext_mysqldb' has no len()"))
+[2022-07-29 11:49:01,221] - user_username - ERROR - Exception(TypeError("object of type 'MySQLExecutionContext_mysqldb' has no len()"))

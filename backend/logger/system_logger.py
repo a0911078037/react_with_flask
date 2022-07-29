@@ -2,7 +2,7 @@ import logging
 import os
 from datetime import datetime
 from logging.handlers import RotatingFileHandler
-log_format = '[%(asctime)s] - [%levelno]s'
+log_format = '[%(asctime)s] - %(name)s - %(levelname)s - %(message)s'
 
 
 class Logger:

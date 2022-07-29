@@ -32,3 +32,4 @@ class Login(Resource):
         except Exception as e:
             return ApiResponse(None, str(e), False).to_dict(), 200
 
+

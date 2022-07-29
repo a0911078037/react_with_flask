@@ -3,7 +3,8 @@ from __future__ import absolute_import, print_function
 from flask import request
 from . import Resource
 from apps.utils import ApiResponse
-from apps import config, logger
+from apps import config
+from logger.system_logger import Logger
 from data_access.query.users_query import users_query
 from flask_jwt_extended import jwt_required
 import datetime
@@ -14,6 +15,7 @@ import uuid
 class User(Resource):
     def post(self):
         try:
+            logger = Logger().create('User')
             acc = request.json['acc']
             name = request.json['name']
             pws = request.json['pws']
@@ -33,3 +35,4 @@ class User(Resource):
     @jwt_required()
     def get(self):
         return ApiResponse().to_dict(), 200
+

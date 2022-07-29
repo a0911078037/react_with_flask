@@ -71,7 +71,7 @@ export default function SignIn() {
         if (data['status'] === true) {
           sessionStorage.setItem('token', data['result']['token']);
           sessionStorage.setItem('user', data['result']['user']);
-          nav('/main', {state:{logined: true}});
+          nav(`/main/${data['result']['user']}`, {state:{logined: true}});
         }
         else{
           showerror(data['msg']);

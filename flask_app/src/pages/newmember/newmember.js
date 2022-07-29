@@ -13,7 +13,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { toast } from 'react-toastify';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 // function Copyright(props) {
 //   return (
@@ -54,12 +54,57 @@ function showerror(msg) {
     });
 }
 
+
 const theme = createTheme();
 
 export default function SignUp() {
     var nav = useNavigate();
+    var loc = useLocation();
+    const [name_focus, setName_focus] = React.useState(false);
+    const [pws_focus, setPws_focus] = React.useState(false);
+    const [acc_focus, setAcc_focus] = React.useState(false);
+    const [name, setName] = React.useState('');
+    const [acc, setAcc] = React.useState('');
+    React.useEffect(() => {
+        if (loc.state && loc.state.update) {
+            delete loc.state.update;
+            fetch(`http://${process.env.REACT_APP_BACKEND_IP}:${process.env.REACT_APP_BACKEND_PORT}/api/user/${sessionStorage.getItem("user")}`, {
+                method: "GET",
+                headers: new Headers({
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + sessionStorage.getItem("token")
+                }),
+            })
+                .then(res => res.json())
+                .then(data => {
+                    setName(data['result']['Name']);
+                    setAcc(data['result']['Account']);
+                    delete loc.state;
+                })
+                .catch(e => { console.log(e) });
+        }
+    });
+    function checkinput() {
+        var check_input = true;
+        if (document.getElementById('password').value === '') {
+            setPws_focus(true);
+            check_input = false;
+        }
+        if (document.getElementById('account').value === '') {
+            setAcc_focus(true);
+            check_input = false;
+        }
+        if (document.getElementById('name').value === '') {
+            setName_focus(true);
+            check_input = false;
+        }
+        return check_input;
+    }
     const handleSubmit = (event) => {
         event.preventDefault();
+        if (!checkinput()) {
+            return;
+        }
         var encode = require('sha.js');
         var data = {
             'name': document.getElementById('name').value,
@@ -73,9 +118,9 @@ export default function SignUp() {
         }).then(res => res.json())
             .then(data => {
                 if (data['status'] === true) {
-                    nav('/', {state: {newmember: true}});
+                    nav('/', { state: { newmember: true } });
                 }
-                else{
+                else {
                     console.log((data['msg']));
                     showerror(data['msg']);
                 }
@@ -112,6 +157,9 @@ export default function SignUp() {
                                     label="姓名"
                                     name="name"
                                     autoComplete="name"
+                                    error={name_focus}
+                                    onFocus={() => setName_focus(false)}
+                                    defaultValue={name}
                                 />
                             </Grid>
                             <Grid item xs={12}>
@@ -122,6 +170,9 @@ export default function SignUp() {
                                     label="帳號"
                                     name="account"
                                     autoComplete="username"
+                                    error={acc_focus}
+                                    onFocus={() => setAcc_focus(false)}
+                                    defaultValue={acc}
                                 />
                             </Grid>
                             <Grid item xs={12}>
@@ -133,6 +184,8 @@ export default function SignUp() {
                                     type="password"
                                     id="password"
                                     autoComplete="new-password"
+                                    error={pws_focus}
+                                    onFocus={() => setPws_focus(false)}
                                 />
                             </Grid>
                         </Grid>

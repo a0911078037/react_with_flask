@@ -1,22 +1,40 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, print_function
-
-from flask import g
-
+from apps.utils import ApiResponse
+from apps import config
+from logger.system_logger import Logger
+from data_access.query.users_query import users_query
+from flask_jwt_extended import jwt_required
+from flask import g, request
 from . import Resource
+
+logger = Logger().create('user_username')
 
 
 class UserUsername(Resource):
 
+    @jwt_required()
     def get(self, username):
-
-        return {}, 200, None
+        try:
+            result = users_query(config, logger).Get_user_data(username)
+            return ApiResponse(result[0]).to_dict(), 200, None
+        except Exception as e:
+            logger.error(repr(e))
+            return ApiResponse(None, str(e), False).to_dict(), 200
 
     def put(self, username):
         print(g.json)
 
         return {}, 200, None
 
+    @jwt_required()
     def delete(self, username):
-
-        return {}, 200, None
+        try:
+            user = request.json['user']
+            if username != user:
+                raise Exception('非法刪除!')
+            users_query(config, logger).Delete_user(user)
+            return ApiResponse().to_dict(), 200, None
+        except Exception as e:
+            logger.error(repr(e))
+            return ApiResponse(None, str(e), False).to_dict(), 200

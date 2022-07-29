@@ -41,3 +41,31 @@ class users_query:
             return result
         except Exception as e:
             raise Exception(e)
+
+    def Delete_user(self, user=''):
+        try:
+            self.logger.debug(f'deleting user:{user}')
+            sql = f'''
+                DELETE FROM users WHERE Name = '{user}'
+                '''
+            self._db_handler.execute(sql)
+        except Exception as e:
+            raise Exception(e)
+
+    def Get_user_data(self, user=''):
+        try:
+            self.logger.debug(f'getting user={user} count')
+            sql = f'''
+                    SELECT Name, Account FROM Users WHERE Name = '{user}'
+                   '''
+            pd_data = self._db_handler.execute(sql)
+            result = []
+            for data in pd_data:
+                d = {
+                    'Name': data['Name'],
+                    'Account': data['Account']
+                }
+                result.append(d)
+            return result
+        except Exception as e:
+            raise Exception(e)

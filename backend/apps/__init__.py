@@ -1,3 +1,5 @@
+import logging
+
 from flask import Flask
 from data_access.config_loader import ConfigLoader
 from logger.system_logger import Logger
@@ -5,7 +7,7 @@ from flask_cors import CORS
 from flask_jwt_extended import JWTManager
 import v1 as api
 
-logger = Logger().create()
+logger = Logger().create(level=logging.DEBUG)
 config = ConfigLoader('./env/api_config.yml').get_config()
 
 
@@ -19,7 +21,6 @@ if __name__ == "__main__":
     jwt = JWTManager()
     jwt.init_app(app)
     CORS(app)
-
     app.run(
         host=config['API']['IP'],
         port=config['API']['PORT'],
