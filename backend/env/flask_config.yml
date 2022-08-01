@@ -10,6 +10,8 @@ basePath: /v1
 tags:
   - name: User
     description: user permission etc..
+  - name: Product
+    description: product detail
 schemes:
   - https
 paths:
@@ -31,7 +33,29 @@ paths:
             $ref: '#/definitions/User'
       responses:
         '200':
-          description: successful operation
+          description: successful creation
+          schema:
+            $ref: '#/definitions/ApiResponse'
+        '400':
+          description: Invalid username/password supplied
+    put:
+      tags:
+        - User
+      summary: Create user
+      description: updated user
+      operationId: updated User
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: updated user object
+          required: true
+          schema:
+            $ref: '#/definitions/User'
+      responses:
+        '200':
+          description: successful creation
           schema:
             $ref: '#/definitions/ApiResponse'
         '400':
@@ -137,7 +161,6 @@ paths:
       description: This can only be done by the logged in user.
       operationId: deleteUser
       produces:
-        - application/xml
         - application/json
       parameters:
         - name: username
@@ -150,6 +173,78 @@ paths:
           description: success
           schema:
             $ref: '#/definitions/ApiResponse'
+  /product/{username}:
+    get:
+      tags:
+        - Product
+      summary: Get all information of product
+      description: needs to be login
+      operationId: getProduct
+      parameters:
+        - name: username
+          in: path
+          required: true
+          type: string
+      responses:
+        '200':
+          description: success
+          schema:
+            $ref: '#/definitions/ApiResponse'
+
+  /product:
+    post:
+      tags:
+        - Product
+      summary: create product object
+      description: needs to be login
+      operationId: postProduct
+      parameters:
+        - in: body
+          name: body
+          description: Created product object
+          required: true
+          schema:
+            $ref: '#/definitions/Product'
+      responses:
+        '200':
+          description: success
+          schema:
+            $ref: '#/definitions/ApiResponse'
+    put:
+      tags:
+        - Product
+      summary: update product object
+      description: needs to be login
+      operationId: putProduct
+      parameters:
+        - in: query
+          name: productID
+          type: string
+          description: update product object
+          required: true
+      responses:
+        '200':
+          description: success
+          schema:
+            $ref: '#/definitions/ApiResponse'
+    delete:
+      tags:
+        - Product
+      summary: delete product object
+      description: needs to be login
+      operationId: deleteProduct
+      parameters:
+        - in: query
+          name: productID
+          type: string
+          description: delete product object
+          required: true
+      responses:
+        '200':
+          description: success
+          schema:
+            $ref: '#/definitions/ApiResponse'
+
 definitions:
   User:
     type: object
@@ -164,13 +259,28 @@ definitions:
         type: string
       Add_Date:
         type: string
+      salt:
+        type: string
+  Product:
+    type: object
+    properties:
+      ID:
+        type: string
+      Product:
+        type: string
+      Price:
+        type: integer
+      Type:
+        type: string
+      Description:
+        type: string
   ApiResponse:
     type: object
     properties:
       code:
         type: integer
         format: int32
-      type:
+      status:
         type: string
       message:
         type: string

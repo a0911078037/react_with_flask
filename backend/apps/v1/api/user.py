@@ -22,7 +22,9 @@ class User(Resource):
             salt = uuid.uuid4().hex[0:10]
             date = str(datetime.datetime.now())
             pws = hashlib.sha256((salt + pws).encode('utf-8')).hexdigest()
-            users_query(config, logger).Insert_Users_data(acc, pws, name, salt, date)
+            con = users_query(config, logger)
+            con.Insert_Users_data(acc, pws, name, salt, date)
+            con.Create_user_product_table(name)
             return ApiResponse().to_dict(), 200, None
         except Exception as e:
             msg = str(e)

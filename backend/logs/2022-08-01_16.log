@@ -1,0 +1,12 @@
+[2022-08-01 16:31:23,568] - product - ERROR - database error: (MySQLdb.DataError) (1264, "Out of range value for column 'Price' at row 1")
+[SQL: 
+                    INSERT INTO temo_product (ID, Product, Type, Price, Description)
+                    VALUES ("21312", "31213213", "12312312312", 3123123213, "21312312");
+                    ]
+(Background on this error at: https://sqlalche.me/e/14/9h9h)
+[2022-08-01 16:38:01,235] - product - ERROR - database error: (MySQLdb.OperationalError) (1054, "Unknown column 'coco' in 'field list'")
+[SQL: 
+                    INSERT INTO temo_product (ID, Product, Type, Price, Description)
+                    VALUES ("3", "coco", "coco", coco, "coco");
+                    ]
+(Background on this error at: https://sqlalche.me/e/14/e3q8)

@@ -50,21 +50,30 @@ class RefNode(object):
 
 base_path = '/v1'
 
-definitions = {'definitions': {'User': {'type': 'object', 'properties': {'Account': {'type': 'string'}, 'Password': {'type': 'string'}, 'Name': {'type': 'string'}, 'key': {'type': 'string'}, 'Add_Date': {'type': 'string'}}}, 'ApiResponse': {'type': 'object', 'properties': {'code': {'type': 'integer', 'format': 'int32'}, 'type': {'type': 'string'}, 'message': {'type': 'string'}}}}, 'parameters': {}}
+definitions = {'definitions': {'User': {'type': 'object', 'properties': {'Account': {'type': 'string'}, 'Password': {'type': 'string'}, 'Name': {'type': 'string'}, 'key': {'type': 'string'}, 'Add_Date': {'type': 'string'}, 'salt': {'type': 'string'}}}, 'Product': {'type': 'object', 'properties': {'ID': {'type': 'string'}, 'Product': {'type': 'string'}, 'Price': {'type': 'integer'}, 'Type': {'type': 'string'}, 'Description': {'type': 'string'}}}, 'ApiResponse': {'type': 'object', 'properties': {'code': {'type': 'integer', 'format': 'int32'}, 'status': {'type': 'string'}, 'message': {'type': 'string'}}}}, 'parameters': {}}
 
 validators = {
     ('user', 'POST'): {'json': {'$ref': '#/definitions/User'}},
+    ('user', 'PUT'): {'json': {'$ref': '#/definitions/User'}},
     ('login', 'POST'): {'args': {'required': ['username', 'password'], 'properties': {'username': {'type': 'string'}, 'password': {'type': 'string'}}}},
     ('user_username', 'PUT'): {'json': {'$ref': '#/definitions/User'}},
+    ('product', 'POST'): {'json': {'$ref': '#/definitions/Product'}},
+    ('product', 'PUT'): {'args': {'required': ['productID'], 'properties': {'productID': {'type': 'string', 'description': 'update product object'}}}},
+    ('product', 'DELETE'): {'args': {'required': ['productID'], 'properties': {'productID': {'type': 'string', 'description': 'delete product object'}}}},
 }
 
 filters = {
     ('user', 'POST'): {200: {'headers': None, 'schema': {'$ref': '#/definitions/ApiResponse'}}, 400: {'headers': None, 'schema': None}},
+    ('user', 'PUT'): {200: {'headers': None, 'schema': {'$ref': '#/definitions/ApiResponse'}}, 400: {'headers': None, 'schema': None}},
     ('login', 'POST'): {200: {'headers': {'X-Rate-Limit': {'type': 'integer', 'format': 'int32', 'description': 'calls per hour allowed by the user'}, 'X-Expires-After': {'type': 'string', 'format': 'date-time', 'description': 'date in UTC when token expires'}}, 'schema': {'$ref': '#/definitions/ApiResponse'}}, 400: {'headers': None, 'schema': None}},
     ('user_logout', 'GET'): {200: {'headers': None, 'schema': {'$ref': '#/definitions/ApiResponse'}}},
     ('user_username', 'GET'): {200: {'headers': None, 'schema': {'$ref': '#/definitions/ApiResponse'}}},
     ('user_username', 'PUT'): {200: {'headers': None, 'schema': {'$ref': '#/definitions/ApiResponse'}}},
     ('user_username', 'DELETE'): {200: {'headers': None, 'schema': {'$ref': '#/definitions/ApiResponse'}}},
+    ('product_username', 'GET'): {200: {'headers': None, 'schema': {'$ref': '#/definitions/ApiResponse'}}},
+    ('product', 'POST'): {200: {'headers': None, 'schema': {'$ref': '#/definitions/ApiResponse'}}},
+    ('product', 'PUT'): {200: {'headers': None, 'schema': {'$ref': '#/definitions/ApiResponse'}}},
+    ('product', 'DELETE'): {200: {'headers': None, 'schema': {'$ref': '#/definitions/ApiResponse'}}},
 }
 
 scopes = {

@@ -1,5 +1,5 @@
 import logging
-
+from datetime import timedelta
 from flask import Flask
 from data_access.config_loader import ConfigLoader
 from logger.system_logger import Logger
@@ -18,6 +18,9 @@ if __name__ == "__main__":
     app.config['JWT_TOKEN_LOCATION'] = ['headers']
     app.config['JWT_COOKIE_SECURE'] = True
     app.config['JSON_AS_ASCII'] = False
+    app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(hours=1)
+    app.config["JWT_REFRESH_TOKEN_EXPIRES"] = timedelta(days=30)
+
     jwt = JWTManager()
     jwt.init_app(app)
     CORS(app)

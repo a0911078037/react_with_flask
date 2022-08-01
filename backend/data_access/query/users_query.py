@@ -69,3 +69,20 @@ class users_query:
             return result
         except Exception as e:
             raise Exception(e)
+
+    def Create_user_product_table(self, user=''):
+        try:
+            self.logger.debug(f'creating product table for user:{user}')
+            table_name = f'{user}_product'
+            sql = f'''
+                CREATE TABLE {table_name}(
+                    ID varchar(32),
+                    Product varchar(32),
+                    Type varchar(32),
+                    Price int,
+                    Description varchar(64)
+                );
+                '''
+            self._db_handler.execute(sql)
+        except Exception as e:
+            raise Exception(e)
