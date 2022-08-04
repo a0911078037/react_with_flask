@@ -23,6 +23,8 @@ class Product(Resource):
             price = request.json['price']
             des = request.json['description']
             user = request.json['user']
+            logger.debug(f'insert new data ID:{ID}, product:{product}, Type:{Type}, '
+                         f'Price:{price}, des:{des}, user:{user}')
             product_query(config, logger).Insert_product(user, ID, product, Type, price, des)
             return ApiResponse().to_dict(), 200
         except Exception as e:
@@ -36,6 +38,7 @@ class Product(Resource):
     def delete(self):
         ID_list = request.json['ID_list']
         user = request.json['user']
+        print(ID_list)
         for ID in ID_list:
             product_query(config, logger).Delete_product(user, ID)
         return ApiResponse().to_dict(), 200

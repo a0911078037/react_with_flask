@@ -123,8 +123,21 @@ const Main = () => {
             }).catch(e => console.log(e));
     }, []);
 
+    function Get_product() {
+        fetch(`http://${process.env.REACT_APP_BACKEND_IP}:${process.env.REACT_APP_BACKEND_PORT}/api/product/${user}`, {
+            method: 'GET',
+            headers: new Headers({
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + sessionStorage.getItem('token')
+            })
+        }).then(res => res.json())
+            .then(data => {
+                setRows(data.result);
+            }).catch(e => console.log(e));
+    };
+
     function Insert_product() {
-        let data = {
+        var data = {
             'ID': document.getElementById('id').value,
             'product': document.getElementById('product').value,
             'type': document.getElementById('type').value,
@@ -132,58 +145,64 @@ const Main = () => {
             'description': document.getElementById('description').value,
             'user': user
         }
+        for(var key in data){
+            if(data[key] === ''){
+                showerror('請正確地輸入數值');
+                return;
+            }
+        }
         setAddData(false);
-        fetch(`http://${process.env.REACT_APP_BACKEND_IP}:${process.env.REACT_APP_BACKEND_PORT}/api/product`, {
-            method: 'POST',
-            headers: new Headers({
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + sessionStorage.getItem('token')
-            }),
-            body: JSON.stringify(data)
-        }).then(res => res.json())
-            .then(data => {
-                if (data.status === true) {
-                    showmsg('新增成功');
-                }
-                else {
-                    showerror(data.msg);
-                }
-            })
-            .then(fetch(`http://${process.env.REACT_APP_BACKEND_IP}:${process.env.REACT_APP_BACKEND_PORT}/api/product/${user}`, {
-                method: 'GET',
+        var p = new Promise(()=> {
+            fetch(`http://${process.env.REACT_APP_BACKEND_IP}:${process.env.REACT_APP_BACKEND_PORT}/api/product`, {
+                method: 'POST',
                 headers: new Headers({
                     'Content-Type': 'application/json',
                     'Authorization': 'Bearer ' + sessionStorage.getItem('token')
-                })
+                }),
+                body: JSON.stringify(data)
             }).then(res => res.json())
                 .then(data => {
-                    console.log(data.result);
-                    setRows(data.result);
-                }).catch(e => console.log(e)));
-
+                    if (data.status === true) {
+                        showmsg('新增成功');
+                    }
+                    else {
+                        showerror(data.msg);
+                    }
+                }).then(()=>{
+                    Get_product();
+                })
+        });
 
     }
 
     function DeleteProduct() {
-        var data = {ID_list: selectedRows.map(a=>a.id), user: user};
-        fetch(`http://${process.env.REACT_APP_BACKEND_IP}:${process.env.REACT_APP_BACKEND_PORT}/api/product`, {
-            method: 'DELETE',
-            headers: new Headers({
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + sessionStorage.getItem('token')
-            }),
-            body: JSON.stringify(data)
-        }).then(res => res.json())
-            .then(data => {
-                if (data.status === true) {
-                    showmsg('刪除成功');
-                }
-                else {
-                    showerror(data.msg);
-                }
-            })
-            .catch(e => console.log(e));
         setAddData(false);
+        var promise = new Promise(()=> {
+            var data = { ID_list: selectedRows.map(a => a.id), user: user };
+            if (data.ID_list.length === 0) {
+                showerror('請選擇產品');
+                return;
+            }
+            fetch(`http://${process.env.REACT_APP_BACKEND_IP}:${process.env.REACT_APP_BACKEND_PORT}/api/product`, {
+                method: 'DELETE',
+                headers: new Headers({
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + sessionStorage.getItem('token')
+                }),
+                body: JSON.stringify(data)
+            }).then(res => res.json())
+                .then(data => {
+                    if (data.status === true) {
+                        showmsg('刪除成功');
+                    }
+                    else {
+                        showerror(data.msg);
+                    }
+                }).then(()=>{
+                    Get_product();
+                });
+        });
+
     }
 
     function Logout() {
@@ -408,9 +427,13 @@ const Main = () => {
                         margin="dense"
                         id="price"
                         label="Price"
-                        type="text"
+                        type="number"
                         fullWidth
                         variant="standard"
+                        InputProps={{ inputProps: { min: 0, max: 10000 } }}
+                        onInput = {(e) =>{
+                            e.target.value = Math.max(0, parseInt(e.target.value) ).toString().slice(0,12)
+                        }}
                     />
                     <TextField
                         autoFocus

@@ -42,6 +42,17 @@ class users_query:
         except Exception as e:
             raise Exception(e)
 
+    def Delete_user_table(self, user=''):
+        try:
+            table_name = f'{user}_product'
+            self.logger.debug(f'deleting user table:{table_name}')
+            sql = f'''
+                    DROP TABLE {table_name};
+                    '''
+            self._db_handler.execute(sql)
+        except Exception as e:
+            raise Exception(e)
+
     def Delete_user(self, user=''):
         try:
             self.logger.debug(f'deleting user:{user}')

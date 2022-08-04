@@ -33,7 +33,9 @@ class UserUsername(Resource):
             user = request.json['user']
             if username != user:
                 raise Exception('非法刪除!')
-            users_query(config, logger).Delete_user(user)
+            con = users_query(config, logger)
+            con.Delete_user(user)
+            con.Delete_user_table(user)
             return ApiResponse().to_dict(), 200, None
         except Exception as e:
             logger.error(repr(e))

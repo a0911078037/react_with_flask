@@ -18,7 +18,7 @@ class Logger:
 
         if not os.path.isdir(log_path):
             os.mkdir(log_path)
-        handler = RotatingFileHandler(filename=log_path + f'{time:/%Y-%m-%d_%H}.log'
+        handler = RotatingFileHandler(filename=log_path + f'{time:/%Y-%m-%d}.log'
                                       , maxBytes=100000, backupCount=5)
         logger.setLevel(level)
         formatter = logging.Formatter(log_format)

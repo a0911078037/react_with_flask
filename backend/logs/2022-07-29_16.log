@@ -1,8 +1,0 @@
-[2022-07-29 16:33:37,714] - System - DEBUG - connect to database
-[2022-07-29 16:33:37,726] - System - DEBUG - database connected
-[2022-07-29 16:33:37,726] - System - DEBUG - getting password auth
-[2022-07-29 16:33:37,726] - System - DEBUG - execute sql statement
-[2022-07-29 16:37:09,026] - System - DEBUG - connect to database
-[2022-07-29 16:37:09,030] - System - DEBUG - database connected
-[2022-07-29 16:37:09,030] - System - DEBUG - getting password auth
-[2022-07-29 16:37:09,030] - System - DEBUG - execute sql statement
