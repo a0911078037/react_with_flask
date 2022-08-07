@@ -1,0 +1,24 @@
+connect to database
+database connected
+getting password auth
+execute sql statement
+connect to database
+database connected
+getting password auth
+execute sql statement
+[2022-07-29 09:45:27,506] - {15} - System - DEBUG - connect to database
+[2022-07-29 09:45:27,514] - {17} - System - DEBUG - database connected
+[2022-07-29 09:45:27,514] - {27} - System - DEBUG - getting password auth
+[2022-07-29 09:45:27,514] - {23} - System - DEBUG - execute sql statement
+[2022-07-29 09:45:50,021] - {15} - System - DEBUG - connect to database
+[2022-07-29 09:45:50,025] - {17} - System - DEBUG - database connected
+[2022-07-29 09:45:50,026] - {27} - System - DEBUG - getting password auth
+[2022-07-29 09:45:50,026] - {23} - System - DEBUG - execute sql statement
+[2022-07-29 09:45:52,097] - {15} - System - DEBUG - connect to database
+[2022-07-29 09:45:52,100] - {17} - System - DEBUG - database connected
+[2022-07-29 09:45:52,100] - {27} - System - DEBUG - getting password auth
+[2022-07-29 09:45:52,100] - {23} - System - DEBUG - execute sql statement
+[2022-07-29 09:56:54,818] - System - DEBUG - connect to database
+[2022-07-29 09:56:54,826] - System - DEBUG - database connected
+[2022-07-29 09:56:54,826] - System - DEBUG - getting password auth
+[2022-07-29 09:56:54,826] - System - DEBUG - execute sql statement

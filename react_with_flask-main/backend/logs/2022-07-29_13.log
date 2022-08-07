@@ -1,0 +1,19 @@
+[2022-07-29 13:47:06,873] - System - DEBUG - connect to database
+[2022-07-29 13:47:06,884] - System - DEBUG - database connected
+[2022-07-29 13:47:06,884] - System - DEBUG - getting password auth
+[2022-07-29 13:47:06,884] - System - DEBUG - execute sql statement
+[2022-07-29 13:47:33,179] - user_username - ERROR - TypeError("'<' not supported between instances of 'list' and 'int'")
+[2022-07-29 13:47:35,916] - user_username - ERROR - TypeError("'<' not supported between instances of 'list' and 'int'")
+[2022-07-29 13:47:38,921] - user_username - ERROR - TypeError("'<' not supported between instances of 'list' and 'int'")
+[2022-07-29 13:47:42,501] - user_username - ERROR - TypeError("'<' not supported between instances of 'list' and 'int'")
+[2022-07-29 13:47:45,048] - user_username - ERROR - TypeError("'<' not supported between instances of 'list' and 'int'")
+[2022-07-29 14:01:06,211] - System - DEBUG - connect to database
+[2022-07-29 14:01:06,215] - System - DEBUG - database connected
+[2022-07-29 14:01:06,215] - System - DEBUG - getting password auth
+[2022-07-29 14:01:06,215] - System - DEBUG - execute sql statement
+[2022-07-29 14:19:29,878] - System - DEBUG - connect to database
+[2022-07-29 14:19:29,881] - System - DEBUG - database connected
+[2022-07-29 14:19:29,881] - System - DEBUG - getting password auth
+[2022-07-29 14:19:29,881] - System - DEBUG - execute sql statement
+[2022-07-29 14:19:30,997] - user_username - ERROR - <BadRequestKeyError '400: Bad Request'>
+[2022-07-29 14:19:37,264] - user_username - ERROR - <BadRequestKeyError '400: Bad Request'>

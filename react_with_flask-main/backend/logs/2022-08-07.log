@@ -1,0 +1,54 @@
+[2022-08-07 12:18:11,820] - System - DEBUG - connect to database
+[2022-08-07 12:18:11,839] - System - DEBUG - database connected
+[2022-08-07 12:18:11,840] - System - DEBUG - getting password auth
+[2022-08-07 12:18:11,840] - System - DEBUG - execute sql statement
+[2022-08-07 12:18:20,384] - System - DEBUG - connect to database
+[2022-08-07 12:18:20,389] - System - DEBUG - database connected
+[2022-08-07 12:18:20,389] - System - DEBUG - getting password auth
+[2022-08-07 12:18:20,389] - System - DEBUG - execute sql statement
+[2022-08-07 12:27:56,151] - User - ERROR - database error: (MySQLdb.IntegrityError) (1062, "Duplicate entry '111' for key 'users.PRIMARY'")
+[SQL: 
+                    INSERT INTO users (Account, Password, Name, salt, Add_Date)
+                    VALUES ("111", "6f83618ea1c8360a2bcd99ef1a1a339867a52db294ec136651dda7dac77e2204", "temo", "78ede52451", "2022-08-07 12:27:56.140575");
+                    ]
+(Background on this error at: https://sqlalche.me/e/14/gkpj)
+[2022-08-07 12:43:36,438] - System - DEBUG - connect to database
+[2022-08-07 12:43:36,443] - System - DEBUG - database connected
+[2022-08-07 12:43:36,443] - System - DEBUG - getting password auth
+[2022-08-07 12:43:36,443] - System - DEBUG - execute sql statement
+[2022-08-07 12:43:37,963] - System - DEBUG - connect to database
+[2022-08-07 12:43:37,968] - System - DEBUG - database connected
+[2022-08-07 12:43:37,968] - System - DEBUG - getting password auth
+[2022-08-07 12:43:37,968] - System - DEBUG - execute sql statement
+[2022-08-07 12:45:54,497] - System - DEBUG - connect to database
+[2022-08-07 12:45:54,502] - System - DEBUG - database connected
+[2022-08-07 12:45:54,502] - System - DEBUG - getting password auth
+[2022-08-07 12:45:54,502] - System - DEBUG - execute sql statement
+[2022-08-07 12:45:57,429] - System - DEBUG - connect to database
+[2022-08-07 12:45:57,434] - System - DEBUG - database connected
+[2022-08-07 12:45:57,434] - System - DEBUG - getting password auth
+[2022-08-07 12:45:57,434] - System - DEBUG - execute sql statement
+[2022-08-07 12:45:59,397] - System - DEBUG - connect to database
+[2022-08-07 12:45:59,402] - System - DEBUG - database connected
+[2022-08-07 12:45:59,403] - System - DEBUG - getting password auth
+[2022-08-07 12:45:59,403] - System - DEBUG - execute sql statement
+[2022-08-07 12:46:02,343] - System - DEBUG - connect to database
+[2022-08-07 12:46:02,347] - System - DEBUG - database connected
+[2022-08-07 12:46:02,348] - System - DEBUG - getting password auth
+[2022-08-07 12:46:02,348] - System - DEBUG - execute sql statement
+[2022-08-07 12:46:10,807] - System - DEBUG - connect to database
+[2022-08-07 12:46:10,812] - System - DEBUG - database connected
+[2022-08-07 12:46:10,812] - System - DEBUG - getting password auth
+[2022-08-07 12:46:10,812] - System - DEBUG - execute sql statement
+[2022-08-07 12:47:32,736] - System - DEBUG - connect to database
+[2022-08-07 12:47:32,741] - System - DEBUG - database connected
+[2022-08-07 12:47:32,741] - System - DEBUG - getting password auth
+[2022-08-07 12:47:32,742] - System - DEBUG - execute sql statement
+[2022-08-07 12:47:34,863] - System - DEBUG - connect to database
+[2022-08-07 12:47:34,869] - System - DEBUG - database connected
+[2022-08-07 12:47:34,869] - System - DEBUG - getting password auth
+[2022-08-07 12:47:34,869] - System - DEBUG - execute sql statement
+[2022-08-07 12:51:06,261] - System - DEBUG - connect to database
+[2022-08-07 12:51:06,265] - System - DEBUG - database connected
+[2022-08-07 12:51:06,265] - System - DEBUG - getting password auth
+[2022-08-07 12:51:06,265] - System - DEBUG - execute sql statement

@@ -1,0 +1,13 @@
+STORGE:
+  USING: 'mysql'
+  DATABASE:
+    IP: 'localhost'
+    PORT: '3306'
+    USER: 'root'
+    PASSWORD: 'Ss24518427'
+    DB: 'tests'
+
+API:
+  IP: '127.0.0.1'
+  PORT: '8000'
+  SECRET_KEY: "b'\xbcE1\xf9z{3\xf3\xfdp\xe6V\x91\x9b\x00N'"

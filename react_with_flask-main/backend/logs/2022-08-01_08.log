@@ -1,0 +1,12 @@
+[2022-08-01 08:55:14,660] - System - DEBUG - connect to database
+[2022-08-01 08:55:14,707] - System - DEBUG - database connected
+[2022-08-01 08:55:14,707] - System - DEBUG - getting password auth
+[2022-08-01 08:55:14,708] - System - DEBUG - execute sql statement
+[2022-08-01 09:30:58,289] - System - DEBUG - connect to database
+[2022-08-01 09:30:58,294] - System - DEBUG - database connected
+[2022-08-01 09:30:58,294] - System - DEBUG - getting password auth
+[2022-08-01 09:30:58,294] - System - DEBUG - execute sql statement
+[2022-08-01 09:37:35,634] - System - DEBUG - connect to database
+[2022-08-01 09:37:35,638] - System - DEBUG - database connected
+[2022-08-01 09:37:35,638] - System - DEBUG - getting password auth
+[2022-08-01 09:37:35,638] - System - DEBUG - execute sql statement

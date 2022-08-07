@@ -1,0 +1,58 @@
+[2022-08-04 14:28:12,178] - System - DEBUG - connect to database
+[2022-08-04 14:28:12,184] - System - DEBUG - database connected
+[2022-08-04 14:28:12,185] - System - DEBUG - getting password auth
+[2022-08-04 14:28:12,185] - System - DEBUG - execute sql statement
+[2022-08-04 14:28:13,049] - System - DEBUG - connect to database
+[2022-08-04 14:28:13,052] - System - DEBUG - database connected
+[2022-08-04 14:28:13,053] - System - DEBUG - getting password auth
+[2022-08-04 14:28:13,053] - System - DEBUG - execute sql statement
+[2022-08-04 14:28:17,330] - user_username - ERROR - database error: (MySQLdb.ProgrammingError) (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''temo_product'' at line 1")
+[SQL: 
+                    DROP TABLE 'temo_product';
+                    ]
+(Background on this error at: https://sqlalche.me/e/14/f405)
+[2022-08-04 14:28:17,331] - user_username - ERROR - Exception(Exception(ProgrammingError('(MySQLdb.ProgrammingError) (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \'\'temo_product\'\' at line 1")')))
+[2022-08-04 14:28:47,951] - System - DEBUG - connect to database
+[2022-08-04 14:28:47,956] - System - DEBUG - database connected
+[2022-08-04 14:28:47,956] - System - DEBUG - getting password auth
+[2022-08-04 14:28:47,956] - System - DEBUG - execute sql statement
+[2022-08-04 14:29:09,508] - System - DEBUG - connect to database
+[2022-08-04 14:29:09,512] - System - DEBUG - database connected
+[2022-08-04 14:29:09,512] - System - DEBUG - getting password auth
+[2022-08-04 14:29:09,512] - System - DEBUG - execute sql statement
+[2022-08-04 14:29:41,484] - product - ERROR - database error: (MySQLdb.ProgrammingError) (1064, 'You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \', "3")\' at line 2')
+[SQL: 
+                    INSERT INTO temo_product (ID, Product, Type, Price, Description)
+                    VALUES ("4", "4", "4", , "3");
+                    ]
+(Background on this error at: https://sqlalche.me/e/14/f405)
+[2022-08-04 14:36:18,645] - product - ERROR - database error: (MySQLdb.ProgrammingError) (1064, 'You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \', "")\' at line 2')
+[SQL: 
+                    INSERT INTO temo_product (ID, Product, Type, Price, Description)
+                    VALUES ("", "", "", , "");
+                    ]
+(Background on this error at: https://sqlalche.me/e/14/f405)
+[2022-08-04 14:38:03,489] - product - ERROR - database error: (MySQLdb.ProgrammingError) (1064, 'You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \', "")\' at line 2')
+[SQL: 
+                    INSERT INTO temo_product (ID, Product, Type, Price, Description)
+                    VALUES ("", "", "", , "");
+                    ]
+(Background on this error at: https://sqlalche.me/e/14/f405)
+[2022-08-04 14:38:09,844] - product - ERROR - database error: (MySQLdb.ProgrammingError) (1064, 'You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \', "")\' at line 2')
+[SQL: 
+                    INSERT INTO temo_product (ID, Product, Type, Price, Description)
+                    VALUES ("", "", "", , "");
+                    ]
+(Background on this error at: https://sqlalche.me/e/14/f405)
+[2022-08-04 14:38:26,599] - product - ERROR - database error: (MySQLdb.ProgrammingError) (1064, 'You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \', "")\' at line 2')
+[SQL: 
+                    INSERT INTO temo_product (ID, Product, Type, Price, Description)
+                    VALUES ("", "", "", , "");
+                    ]
+(Background on this error at: https://sqlalche.me/e/14/f405)
+[2022-08-04 14:38:42,462] - product - ERROR - database error: (MySQLdb.ProgrammingError) (1064, 'You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \', "")\' at line 2')
+[SQL: 
+                    INSERT INTO temo_product (ID, Product, Type, Price, Description)
+                    VALUES ("", "", "", , "");
+                    ]
+(Background on this error at: https://sqlalche.me/e/14/f405)
