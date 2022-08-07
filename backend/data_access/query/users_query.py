@@ -97,3 +97,14 @@ class users_query:
             self._db_handler.execute(sql)
         except Exception as e:
             raise Exception(e)
+
+    def update_user_pass(self, user='', pws='', salt=''):
+        try:
+            self.logger.debug(f'update user password user:{user}')
+            sql = f'''
+                    UPDATE users SET Password='{pws}', salt='{salt}'
+                    WHERE Name='{user}'; 
+                    '''
+            self._db_handler.execute(sql)
+        except Exception as e:
+            raise Exception(e)

@@ -111,6 +111,10 @@ const Main = () => {
             showmsg('登入成功');
             delete loc.state;
         }
+        if(loc.state && loc.state.update === true){
+            showmsg('更新成功');
+            delete loc.state;
+        }
         fetch(`http://${process.env.REACT_APP_BACKEND_IP}:${process.env.REACT_APP_BACKEND_PORT}/api/product/${user}`, {
             method: 'GET',
             headers: new Headers({
@@ -211,8 +215,7 @@ const Main = () => {
     }
 
     function update_user_data() {
-        var update = true;
-        nav('/newmember', { state: { update } });
+        nav('/newmember', { state: { update: true } });
     }
     function send() {
         setLoading(true);
@@ -325,7 +328,7 @@ const Main = () => {
                                 open={Boolean(anchorEl)}
                                 onClose={handleClose}
                             >
-                                <MenuItem onClick={update_user_data}>修改用戶資料</MenuItem>
+                                <MenuItem onClick={update_user_data}>更改密碼</MenuItem>
                                 <MenuItem onClick={Logout}>登出</MenuItem>
                                 <MenuItem onClick={() => setOpen(true)}>刪除使用者</MenuItem>
                             </Menu>

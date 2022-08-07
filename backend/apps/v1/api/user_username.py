@@ -5,8 +5,10 @@ from apps import config
 from logger.system_logger import Logger
 from data_access.query.users_query import users_query
 from flask_jwt_extended import jwt_required
-from flask import g, request
+from flask import request
 from . import Resource
+import hashlib
+import uuid
 
 logger = Logger().create('user_username')
 
@@ -22,10 +24,17 @@ class UserUsername(Resource):
             logger.error(repr(e))
             return ApiResponse(None, str(e), False).to_dict(), 200
 
+    @jwt_required()
     def put(self, username):
-        print(g.json)
-
-        return {}, 200, None
+        try:
+            pws = request.json['pws']
+            salt = uuid.uuid4().hex[0:10]
+            pws = hashlib.sha256((salt + pws).encode('utf-8')).hexdigest()
+            users_query(config, logger).update_user_pass(username, pws, salt)
+            return ApiResponse().to_dict(), 200
+        except Exception as e:
+            logger.error(repr(e))
+            return ApiResponse(None, str(e), False).to_dict(), 200
 
     @jwt_required()
     def delete(self, username):

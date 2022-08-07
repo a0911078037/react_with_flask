@@ -3,8 +3,6 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
@@ -51,11 +49,14 @@ export default function SignUp() {
     const [name_focus, setName_focus] = React.useState(false);
     const [pws_focus, setPws_focus] = React.useState(false);
     const [acc_focus, setAcc_focus] = React.useState(false);
+    const [head, setHead] = React.useState('註冊');
+    const [btn, setBtn] = React.useState('申請');
     const [name, setName] = React.useState('');
     const [acc, setAcc] = React.useState('');
     React.useEffect(() => {
         if (loc.state && loc.state.update) {
-            delete loc.state.update;
+            setHead('更新密碼');
+            setBtn('更新');
             fetch(`http://${process.env.REACT_APP_BACKEND_IP}:${process.env.REACT_APP_BACKEND_PORT}/api/user/${sessionStorage.getItem("user")}`, {
                 method: "GET",
                 headers: new Headers({
@@ -67,9 +68,9 @@ export default function SignUp() {
                 .then(data => {
                     setName(data['result']['Name']);
                     setAcc(data['result']['Account']);
-                    delete loc.state;
                 })
                 .catch(e => { console.log(e) });
+
         }
     });
     function checkinput() {
@@ -88,9 +89,39 @@ export default function SignUp() {
         }
         return check_input;
     }
+    function update_pass(){
+        var encode = require('sha.js');
+        var user = sessionStorage.getItem('user');
+        var data = {
+            'pws': encode('sha256').update(document.getElementById('password').value).digest('hex')
+        }
+        fetch(`http://${process.env.REACT_APP_BACKEND_IP}:${process.env.REACT_APP_BACKEND_PORT}/api/user/${user}`, {
+            method: "PUT",
+            headers: new Headers({ 
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + sessionStorage.getItem('token')
+            }),
+            body: JSON.stringify(data)
+        }).then(res => res.json())
+            .then(data => {
+                if (data['status'] === true) {
+                    nav(`/main/${user}`, { state: { update: true } });
+                }
+                else {
+                    console.log((data['msg']));
+                    showerror(data['msg']);
+                }
+            }).catch(e => {
+                console.log(e);
+            });
+    }
     const handleSubmit = (event) => {
         event.preventDefault();
         if (!checkinput()) {
+            return;
+        }
+        if(loc.state.update){
+            update_pass();
             return;
         }
         var encode = require('sha.js');
@@ -100,7 +131,7 @@ export default function SignUp() {
             'pws': encode('sha256').update(document.getElementById('password').value).digest('hex')
         }
         fetch(`http://${process.env.REACT_APP_BACKEND_IP}:${process.env.REACT_APP_BACKEND_PORT}/api/user`, {
-            method: 'POST',
+            method: "POST",
             headers: new Headers({ 'Content-Type': 'application/json' }),
             body: JSON.stringify(data)
         }).then(res => res.json())
@@ -133,7 +164,7 @@ export default function SignUp() {
                         <LockOutlinedIcon />
                     </Avatar>
                     <Typography component="h1" variant="h5">
-                        註冊
+                        {head}
                     </Typography>
                     <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
                         <Grid container spacing={2}>
@@ -147,7 +178,7 @@ export default function SignUp() {
                                     autoComplete="name"
                                     error={name_focus}
                                     onFocus={() => setName_focus(false)}
-                                    defaultValue={name}
+                                    value={name}
                                 />
                             </Grid>
                             <Grid item xs={12}>
@@ -160,7 +191,7 @@ export default function SignUp() {
                                     autoComplete="username"
                                     error={acc_focus}
                                     onFocus={() => setAcc_focus(false)}
-                                    defaultValue={acc}
+                                    value={acc}
                                 />
                             </Grid>
                             <Grid item xs={12}>
@@ -168,7 +199,7 @@ export default function SignUp() {
                                     required
                                     fullWidth
                                     name="password"
-                                    label="密碼"
+                                    label='密碼'
                                     type="password"
                                     id="password"
                                     autoComplete="new-password"
@@ -183,15 +214,15 @@ export default function SignUp() {
                             variant="contained"
                             sx={{ mt: 3, mb: 2 }}
                         >
-                            申請
+                            {btn}
                         </Button>
-                        <Grid container justifyContent="flex-end">
+                        {!loc.state&&<Grid container justifyContent="flex-end">
                             <Grid item>
                                 <Link href="/" variant="body2">
                                     已經有帳號了?登入
                                 </Link>
                             </Grid>
-                        </Grid>
+                        </Grid>}
                     </Box>
                 </Box>
                 {/* <Copyright sx={{ mt: 5 }} /> */}

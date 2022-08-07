@@ -4,8 +4,8 @@ STORGE:
     IP: 'localhost'
     PORT: '3306'
     USER: 'root'
-    PASSWORD: '0000'
-    DB: 'test'
+    PASSWORD: 'Ss24518427'
+    DB: 'tests'
 
 API:
   IP: '127.0.0.1'
