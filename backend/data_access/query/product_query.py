@@ -32,6 +32,8 @@ class product_query:
             raise Exception(e)
 
     def Insert_product(self, user='', ID='', product='', Type='', price='', des=''):
+        self.logger.debug(f'insert new data ID:{ID}, product:{product}, Type:{Type}, '
+                          f'Price:{price}, des:{des}, user:{user}')
         try:
             table = f'{user}_product'
             sql = f'''
@@ -47,6 +49,19 @@ class product_query:
             table = f'{user}_product'
             sql = f'''
                     DELETE FROM {table} WHERE ID = '{ID}'
+                    '''
+            self._db_handler.execute(sql)
+        except Exception as e:
+            raise Exception(e)
+
+    def Update_product(self, user='', ID='', field='', value=''):
+        self.logger.debug(f'updating product user:{user} id:{ID}, field:{field}, value:{value}')
+        try:
+            table = f'{user}_product'
+            sql = f'''
+                    UPDATE {table}
+                    SET {field} = '{value}'
+                    WHERE ID = {ID}
                     '''
             self._db_handler.execute(sql)
         except Exception as e:

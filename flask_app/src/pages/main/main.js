@@ -79,23 +79,26 @@ const Main = () => {
         setAnchorEl(null);
     };
     const columns = [
-        { field: 'id', headerName: 'ID', width: 70 },
-        { field: 'product', headerName: 'Product', width: 190 },
+        { field: 'id', headerName: 'ID', width: 70, editable: true},
+        { field: 'product', headerName: 'Product', width: 190, editable: true },
         {
             field: 'type',
             headerName: 'Type',
             width: 150,
+            editable: true
         },
         {
             field: 'price',
             headerName: 'Price',
             type: 'number',
             width: 90,
+            editable: true
         },
         {
             field: 'description',
             headerName: 'Description',
-            width: 450
+            width: 450,
+            editable: true
         }
     ];
 
@@ -111,7 +114,7 @@ const Main = () => {
             showmsg('登入成功');
             delete loc.state;
         }
-        if(loc.state && loc.state.update === true){
+        if (loc.state && loc.state.update === true) {
             showmsg('更新成功');
             delete loc.state;
         }
@@ -125,7 +128,29 @@ const Main = () => {
             .then(data => {
                 setRows(data.result);
             }).catch(e => console.log(e));
+        
+
     }, []);
+
+    function update_product(product) {
+        product['user'] = sessionStorage.getItem('user');
+        fetch(`http://${process.env.REACT_APP_BACKEND_IP}:${process.env.REACT_APP_BACKEND_PORT}/api/product`, {
+            method: 'PUT',
+            headers: new Headers({
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + sessionStorage.getItem('token')
+            }),
+            body: JSON.stringify(product)
+        }).then(res => res.json())
+            .then(data => {
+                if(data['status'] === true){
+                    showmsg('更新成功');
+                }else{
+                    showerror('更新失敗');
+                }
+            }).catch(e => console.log(e));
+        
+    }
 
     function Get_product() {
         fetch(`http://${process.env.REACT_APP_BACKEND_IP}:${process.env.REACT_APP_BACKEND_PORT}/api/product/${user}`, {
@@ -149,14 +174,14 @@ const Main = () => {
             'description': document.getElementById('description').value,
             'user': user
         }
-        for(var key in data){
-            if(data[key] === ''){
+        for (var key in data) {
+            if (data[key] === '') {
                 showerror('請正確地輸入數值');
                 return;
             }
         }
         setAddData(false);
-        var p = new Promise(()=> {
+        var p = new Promise(() => {
             fetch(`http://${process.env.REACT_APP_BACKEND_IP}:${process.env.REACT_APP_BACKEND_PORT}/api/product`, {
                 method: 'POST',
                 headers: new Headers({
@@ -172,7 +197,7 @@ const Main = () => {
                     else {
                         showerror(data.msg);
                     }
-                }).then(()=>{
+                }).then(() => {
                     Get_product();
                 })
         });
@@ -181,7 +206,7 @@ const Main = () => {
 
     function DeleteProduct() {
         setAddData(false);
-        var promise = new Promise(()=> {
+        var promise = new Promise(() => {
             var data = { ID_list: selectedRows.map(a => a.id), user: user };
             if (data.ID_list.length === 0) {
                 showerror('請選擇產品');
@@ -202,7 +227,7 @@ const Main = () => {
                     else {
                         showerror(data.msg);
                     }
-                }).then(()=>{
+                }).then(() => {
                     Get_product();
                 });
         });
@@ -359,6 +384,7 @@ const Main = () => {
                         checkboxSelection
                         autoHeight={true}
                         disableSelectionOnClick
+                        onCellEditCommit={update_product}
                         onSelectionModelChange={(ids) => {
                             const selectedIDs = new Set(ids);
                             const selectedRows = rows.filter((row) =>
@@ -434,8 +460,8 @@ const Main = () => {
                         fullWidth
                         variant="standard"
                         InputProps={{ inputProps: { min: 0, max: 10000 } }}
-                        onInput = {(e) =>{
-                            e.target.value = Math.max(0, parseInt(e.target.value) ).toString().slice(0,12)
+                        onInput={(e) => {
+                            e.target.value = Math.max(0, parseInt(e.target.value)).toString().slice(0, 12)
                         }}
                     />
                     <TextField

@@ -23,22 +23,33 @@ class Product(Resource):
             price = request.json['price']
             des = request.json['description']
             user = request.json['user']
-            logger.debug(f'insert new data ID:{ID}, product:{product}, Type:{Type}, '
-                         f'Price:{price}, des:{des}, user:{user}')
             product_query(config, logger).Insert_product(user, ID, product, Type, price, des)
             return ApiResponse().to_dict(), 200
         except Exception as e:
+            logger.error(repr(e))
             return ApiResponse(_msg=str(e), _status=False).to_dict(), 200
 
     @jwt_required()
     def put(self):
-        return ApiResponse().to_dict(), 200
+        try:
+            ID = request.json['id']
+            field = request.json['field']
+            value = request.json['value']
+            user = request.json['user']
+            product_query(config, logger).Update_product(user, ID, field, value)
+            return ApiResponse().to_dict(), 200
+        except Exception as e:
+            logger.error(repr(e))
+            return ApiResponse(_msg=str(e), _status=False).to_dict(), 200
 
     @jwt_required()
     def delete(self):
-        ID_list = request.json['ID_list']
-        user = request.json['user']
-        print(ID_list)
-        for ID in ID_list:
-            product_query(config, logger).Delete_product(user, ID)
-        return ApiResponse().to_dict(), 200
+        try:
+            ID_list = request.json['ID_list']
+            user = request.json['user']
+            for ID in ID_list:
+                product_query(config, logger).Delete_product(user, ID)
+            return ApiResponse().to_dict(), 200
+        except Exception as e:
+            logger.error(repr(e))
+            return ApiResponse(_msg=str(e), _status=False).to_dict(), 200

@@ -23,7 +23,7 @@ if __name__ == "__main__":
 
     jwt = JWTManager()
     jwt.init_app(app)
-    CORS(app)
+    CORS(app, resources={r"/.*": {"origins": ["http://127.0.0.1:3000"]}})
     app.run(
         host=config['API']['IP'],
         port=config['API']['PORT'],
