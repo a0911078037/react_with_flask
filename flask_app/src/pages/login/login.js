@@ -3,8 +3,6 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
@@ -45,6 +43,8 @@ function showerror(msg) {
 }
 
 export default function SignIn() {
+  const [acc_focus, setAcc_focus] = React.useState(false);
+  const [pws_focus, setPws_focus] = React.useState(false);
   var nav = useNavigate();
   var loc = useLocation();
   if(loc.state && loc.state.logout){
@@ -55,6 +55,18 @@ export default function SignIn() {
     showmsg('註冊成功，請登入');
     window.history.replaceState({}, document.title);
   }
+  function check_input(){
+    var flag = false;
+    if(document.getElementById('account').value === ''){
+      setAcc_focus(true);
+      flag = true;
+    }
+    if(document.getElementById('password').value === ''){
+      setPws_focus(true);
+      flag = true;
+    }
+    return flag;
+  }
   const handleSubmit = (event) => {
     event.preventDefault();
     var encode = require('sha.js');
@@ -62,6 +74,10 @@ export default function SignIn() {
       'acc': document.getElementById('account').value,
       'pws': encode('sha256').update(document.getElementById('password').value).digest('hex')
     }
+    if(check_input()){
+      return;
+    }
+
     fetch(`http://${process.env.REACT_APP_BACKEND_IP}:${process.env.REACT_APP_BACKEND_PORT}/api/login`, {
       method: 'POST',
       headers: new Headers({ 'Content-Type': 'application/json' }),
@@ -109,6 +125,8 @@ export default function SignIn() {
               name="account"
               autoComplete="account"
               autoFocus
+              error={acc_focus}
+              onFocus={() => setAcc_focus(false)}
             />
             <TextField
               margin="normal"
@@ -119,6 +137,8 @@ export default function SignIn() {
               type="password"
               id="password"
               autoComplete="current-password"
+              error={pws_focus}
+              onFocus={() => setPws_focus(false)}
             />
             <Button
               type="submit"
@@ -137,7 +157,6 @@ export default function SignIn() {
             </Grid>
           </Box>
         </Box>
-        {/* <Copyright sx={{ mt: 8, mb: 4 }} /> */}
       </Container>
     </ThemeProvider>
   );

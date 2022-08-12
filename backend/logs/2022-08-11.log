@@ -14,3 +14,7 @@
 [2022-08-11 13:08:22,988] - System - DEBUG - database connected
 [2022-08-11 13:08:22,988] - System - DEBUG - getting password auth
 [2022-08-11 13:08:22,988] - System - DEBUG - execute sql statement
+[2022-08-11 13:41:59,805] - System - DEBUG - connect to database
+[2022-08-11 13:41:59,813] - System - DEBUG - database connected
+[2022-08-11 13:41:59,813] - System - DEBUG - getting password auth
+[2022-08-11 13:41:59,813] - System - DEBUG - execute sql statement

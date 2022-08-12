@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 import LoadingButton from '@mui/lab/LoadingButton';
 import Container from '@mui/material/Container';
 import SendIcon from '@mui/icons-material/Send';
@@ -56,7 +55,6 @@ function showmsg(msg) {
     )
 }
 
-const theme = createTheme();
 
 const Main = () => {
     var user = sessionStorage.getItem('user');
@@ -80,23 +78,23 @@ const Main = () => {
     };
     const columns = [
         { field: 'id', headerName: 'ID', width: 70, editable: true},
-        { field: 'product', headerName: 'Product', width: 190, editable: true },
+        { field: 'product', headerName: '商品', width: 190, editable: true },
         {
             field: 'type',
-            headerName: 'Type',
+            headerName: '類別',
             width: 150,
             editable: true
         },
         {
             field: 'price',
-            headerName: 'Price',
+            headerName: '價格',
             type: 'number',
             width: 90,
             editable: true
         },
         {
             field: 'description',
-            headerName: 'Description',
+            headerName: '說明',
             width: 450,
             editable: true
         }
@@ -181,7 +179,7 @@ const Main = () => {
             }
         }
         setAddData(false);
-        var p = new Promise(() => {
+        new Promise(() => {
             fetch(`http://${process.env.REACT_APP_BACKEND_IP}:${process.env.REACT_APP_BACKEND_PORT}/api/product`, {
                 method: 'POST',
                 headers: new Headers({
@@ -206,7 +204,7 @@ const Main = () => {
 
     function DeleteProduct() {
         setAddData(false);
-        var promise = new Promise(() => {
+        new Promise(() => {
             var data = { ID_list: selectedRows.map(a => a.id), user: user };
             if (data.ID_list.length === 0) {
                 showerror('請選擇產品');
@@ -437,7 +435,7 @@ const Main = () => {
                         autoFocus
                         margin="dense"
                         id="product"
-                        label="Product"
+                        label="商品"
                         type="text"
                         fullWidth
                         variant="standard"
@@ -446,7 +444,7 @@ const Main = () => {
                         autoFocus
                         margin="dense"
                         id="type"
-                        label="Type"
+                        label="類別"
                         type="text"
                         fullWidth
                         variant="standard"
@@ -455,7 +453,7 @@ const Main = () => {
                         autoFocus
                         margin="dense"
                         id="price"
-                        label="Price"
+                        label="價格"
                         type="number"
                         fullWidth
                         variant="standard"
@@ -468,7 +466,7 @@ const Main = () => {
                         autoFocus
                         margin="dense"
                         id="description"
-                        label="description"
+                        label="說明"
                         type="text"
                         fullWidth
                         variant="standard"

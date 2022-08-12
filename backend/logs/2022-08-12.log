@@ -1,0 +1,36 @@
+[2022-08-12 08:58:40,045] - System - DEBUG - connect to database
+[2022-08-12 08:58:40,067] - System - DEBUG - database connected
+[2022-08-12 08:58:40,068] - System - DEBUG - getting password auth
+[2022-08-12 08:58:40,068] - System - DEBUG - execute sql statement
+[2022-08-12 13:08:33,840] - System - DEBUG - connect to database
+[2022-08-12 13:08:33,890] - System - DEBUG - database connected
+[2022-08-12 13:08:33,891] - System - DEBUG - getting password auth
+[2022-08-12 13:08:33,891] - System - DEBUG - execute sql statement
+[2022-08-12 13:08:39,781] - System - DEBUG - connect to database
+[2022-08-12 13:08:39,785] - System - DEBUG - database connected
+[2022-08-12 13:08:39,795] - System - DEBUG - getting password auth
+[2022-08-12 13:08:39,795] - System - DEBUG - execute sql statement
+[2022-08-12 13:18:28,147] - System - DEBUG - connect to database
+[2022-08-12 13:18:28,152] - System - DEBUG - database connected
+[2022-08-12 13:18:28,153] - System - DEBUG - getting password auth
+[2022-08-12 13:18:28,153] - System - DEBUG - execute sql statement
+[2022-08-12 13:23:55,789] - System - DEBUG - connect to database
+[2022-08-12 13:23:55,793] - System - DEBUG - database connected
+[2022-08-12 13:23:55,793] - System - DEBUG - getting password auth
+[2022-08-12 13:23:55,793] - System - DEBUG - execute sql statement
+[2022-08-12 14:01:03,580] - System - DEBUG - connect to database
+[2022-08-12 14:01:03,588] - System - DEBUG - database connected
+[2022-08-12 14:01:03,589] - System - DEBUG - getting password auth
+[2022-08-12 14:01:03,589] - System - DEBUG - execute sql statement
+[2022-08-12 14:06:01,404] - System - DEBUG - connect to database
+[2022-08-12 14:06:01,410] - System - DEBUG - database connected
+[2022-08-12 14:06:01,410] - System - DEBUG - getting password auth
+[2022-08-12 14:06:01,410] - System - DEBUG - execute sql statement
+[2022-08-12 14:15:01,160] - System - DEBUG - connect to database
+[2022-08-12 14:15:01,172] - System - DEBUG - database connected
+[2022-08-12 14:15:01,172] - System - DEBUG - getting password auth
+[2022-08-12 14:15:01,172] - System - DEBUG - execute sql statement
+[2022-08-12 14:15:16,521] - System - DEBUG - connect to database
+[2022-08-12 14:15:16,534] - System - DEBUG - database connected
+[2022-08-12 14:15:16,534] - System - DEBUG - getting password auth
+[2022-08-12 14:15:16,534] - System - DEBUG - execute sql statement
